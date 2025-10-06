@@ -6,174 +6,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deleted Records</title>
+  <title>Deleted Students</title>
 
-  <!-- ===== Internal CSS starts here ===== -->
   <style>
-    /* ==========================
-       GLOBAL STYLES (from style.css)
-    ========================== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
       --bg-primary: #e5e5e5;
-      --bg-secondary: #212327;
+      --bg-secondary: #1e1f23;
       --bg-tertiary: #151618;
-      --bg-elevated: #303236;
       --text-primary: #ffffff;
-      --text-secondary: #e5e5e5;
-      --text-muted: #a3a3a3;
-      --text-disabled: #666666;
+      --text-secondary: #d1d1d1;
       --accent-one: #8b5cf6;
       --accent-one-hover: #a855f7;
-      --accent-two: #9fffc7;
-      --accent-two-hover: #6eebbb;
       --success: #7afaaf;
-      --danger: #8b5cf6;
+      --danger: #ef4444;
       --warning: #f59e0b;
-      --border-primary: #333333;
-      --border-secondary: #404040;
-      --border-accent: #4a4a4a;
-      --radius-lg: 0.3rem;
-      --radius-xl: 0.5rem;
-      --shadow-str: 1px 1px 10px #000;
+      --border-primary: #333;
+      --shadow-str: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-primary) url('Background.jpg') no-repeat fixed;
+      font-family: "Inter", sans-serif;
+      background: var(--bg-primary) url('Background.jpg') no-repeat center center fixed;
       background-size: cover;
       color: var(--text-primary);
-      line-height: 1.6;
+      margin: 0;
       min-height: 100vh;
-      font-size: 14px;
-    }
-
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 2rem;
     }
 
     .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
       margin-bottom: 2rem;
-      padding: 2rem;
-      background: var(--bg-secondary);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-str);
     }
 
-    .page-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-primary);
+    .page-header h1 {
+      font-size: 2rem;
+      color: var(--accent-one);
+      margin-bottom: 0.5rem;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-lg);
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: var(--accent-one);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-one-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-secondary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     .data-card {
       background: var(--bg-secondary);
-      border-radius: var(--radius-xl);
+      border-radius: 15px;
       box-shadow: var(--shadow-str);
-      overflow: hidden;
+      border: 1px solid var(--border-primary);
       padding: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+      overflow-x: auto;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
-    .data-table {
+    table {
       width: 100%;
       border-collapse: collapse;
     }
 
-    .data-table th, .data-table td {
-      padding: 0.75rem;
-      border-bottom: 1px solid var(--border-secondary);
+    th, td {
+      padding: 0.9rem 1rem;
       text-align: left;
       color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-primary);
     }
 
-    .data-table th {
+    th {
       color: var(--text-primary);
       font-weight: 600;
-      border-bottom: 2px solid var(--border-accent);
+      background: var(--bg-tertiary);
     }
 
-    .text-success {
-      color: var(--success);
+    tr:hover {
+      background: rgba(139, 92, 246, 0.08);
     }
 
-    .text-danger {
-      color: var(--danger);
+    a.btn {
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-block;
+      text-align: center;
     }
 
-    .text-warning {
-      color: var(--warning);
+    a.restore-btn {
+      background: var(--success);
+      color: #000;
+    }
+
+    a.restore-btn:hover {
+      opacity: 0.8;
+    }
+
+    a.delete-btn {
+      background: var(--danger);
+      color: white;
+    }
+
+    a.delete-btn:hover {
+      background: #dc2626;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      text-decoration: none;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-primary);
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      th, td {
+        padding: 0.7rem;
+        font-size: 0.85rem;
+      }
     }
   </style>
-  <!-- ===== Internal CSS ends here ===== -->
 </head>
+
 <body>
-  <!-- Your original deleted records PHP content here -->
-   <h1>Deleted Students</h1>
+  <div class="page-header">
+    <h1>Deleted Students</h1>
+    <p>View and manage soft-deleted student records</p>
+  </div>
 
-<table border="1">
-  <tr>
-    <th>ID</th><th>First</th><th>Last</th><th>Email</th><th>Action</th>
-  </tr>
-  <?php foreach ($records as $row): ?>
-  <tr>
-    <td><?= $row['id'] ?></td>
-    <td><?= $row['first_name'] ?></td>
-    <td><?= $row['last_name'] ?></td>
-    <td><?= $row['email'] ?></td>
-    <td>
-      <a href="/users/restore/<?= $row['id'] ?>">♻ Restore</a>
-      <a href="/users/hard-delete/<?= $row['id'] ?>" onclick="return confirm('Delete permanently?')">❌ Hard Delete</a>
-    </td>
-  </tr>
-  <?php endforeach; ?>
-</table>
+  <div class="data-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($records as $row): ?>
+        <tr>
+          <td><?= $row['id'] ?></td>
+          <td><?= $row['first_name'] ?></td>
+          <td><?= $row['last_name'] ?></td>
+          <td><?= $row['email'] ?></td>
+          <td>
+            <a href="/users/restore/<?= $row['id'] ?>" class="btn restore-btn">♻ Restore</a>
+            <a href="/users/hard-delete/<?= $row['id'] ?>" class="btn delete-btn" onclick="return confirm('Delete permanently?')">❌ Delete</a>
+          </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
 
-<p><a href="/users">⬅ Back to Active</a></p>
+  <a href="/users" class="back-link">⬅ Back to Active Students</a>
 </body>
 </html>

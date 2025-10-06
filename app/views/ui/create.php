@@ -1,6 +1,6 @@
 <?php
 // --- Original PHP logic stays the same ---
-// (Assuming your create.php contains your form and PHP insert logic)
+// Example placeholder: (Assuming your create.php contains your insert logic)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,238 +11,178 @@
 
   <!-- ===== Internal CSS starts here ===== -->
   <style>
-    /* ==========================
-       GLOBAL STYLES (from style.css)
-    ========================== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
       --bg-primary: #e5e5e5;
-      --bg-secondary: #212327;
+      --bg-secondary: #1e1f23;
       --bg-tertiary: #151618;
-      --bg-elevated: #303236;
       --text-primary: #ffffff;
-      --text-secondary: #e5e5e5;
+      --text-secondary: #d1d1d1;
       --text-muted: #a3a3a3;
-      --text-disabled: #666666;
       --accent-one: #8b5cf6;
       --accent-one-hover: #a855f7;
-      --accent-two: #9fffc7;
-      --accent-two-hover: #6eebbb;
       --success: #7afaaf;
-      --danger: #8b5cf6;
-      --warning: #f59e0b;
-      --border-primary: #333333;
-      --border-secondary: #404040;
-      --border-accent: #4a4a4a;
-      --radius-lg: 0.3rem;
-      --radius-xl: 0.5rem;
-      --shadow-str: 1px 1px 10px #000;
+      --danger: #ef4444;
+      --border-primary: #333;
+      --shadow-str: 0 6px 20px rgba(0, 0, 0, 0.5);
     }
 
     body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg-primary) url('Background.jpg') no-repeat fixed;
+      font-family: "Inter", sans-serif;
+      background: var(--bg-primary) url('Background.jpg') no-repeat center center fixed;
       background-size: cover;
       color: var(--text-primary);
-      line-height: 1.6;
+      margin: 0;
       min-height: 100vh;
-      font-size: 14px;
-    }
-
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .page-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding: 2rem;
-      background: var(--bg-secondary);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-str);
-    }
-
-    .page-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-lg);
-      font-weight: 600;
-      font-size: 0.8rem;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      align-items: center;
     }
 
-    .btn-primary {
-      background: var(--accent-one);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-one-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border-secondary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-    }
-
-    /* ==========================
-       CREATE PAGE STYLES (from create.css)
-    ========================== */
     .form-card {
-      max-width: 420px;
-      margin: 2rem auto;
       background: var(--bg-secondary);
-      border-radius: 12px;
+      border-radius: 15px;
+      box-shadow: var(--shadow-str);
       border: 1px solid var(--border-primary);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      overflow: hidden;
+      width: 100%;
+      max-width: 450px;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
     .form-header {
-      padding: 1.5rem 1.5rem 1rem;
       text-align: center;
-      border-bottom: 1px solid var(--border-primary);
+      margin-bottom: 1.5rem;
     }
 
-    .form-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
+    .form-header h1 {
+      font-size: 1.8rem;
+      color: var(--accent-one);
       margin-bottom: 0.5rem;
     }
 
-    .form-subtitle {
+    .form-header p {
       color: var(--text-muted);
-      font-size: 0.875rem;
+      font-size: 0.9rem;
     }
 
-    .student-form {
-      padding: 1.5rem;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--text-secondary);
+    label {
       font-weight: 500;
-      font-size: 0.875rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.3rem;
+      display: block;
     }
 
-    .form-input {
+    input[type="text"],
+    input[type="email"] {
       width: 100%;
       padding: 0.75rem;
       background: var(--bg-tertiary);
-      border: 1px solid var(--border-secondary);
+      border: 1px solid var(--border-primary);
       border-radius: 8px;
       color: var(--text-primary);
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
-      outline: none;
-      box-sizing: border-box;
     }
 
-    .form-input::placeholder {
-      color: var(--text-disabled);
-    }
-
-    .form-input:focus {
+    input:focus {
       border-color: var(--accent-one);
-      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+      outline: none;
     }
 
     .form-actions {
       display: flex;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-primary);
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
     }
 
-    .btn-submit {
+    button {
       flex: 1;
       padding: 0.75rem 1rem;
-      font-size: 0.875rem;
+      border: none;
+      background: var(--accent-one);
+      color: white;
+      border-radius: 8px;
+      font-size: 0.9rem;
       font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
 
-    .form-actions .btn-secondary {
+    button:hover {
+      background: var(--accent-one-hover);
+    }
+
+    a.back-link {
+      text-decoration: none;
+      color: var(--text-secondary);
       padding: 0.75rem 1rem;
-      font-size: 0.875rem;
-      font-weight: 500;
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+      background: var(--bg-tertiary);
     }
 
-    @media (max-width: 640px) {
+    a.back-link:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
       .form-card {
         margin: 1rem;
-        border-radius: 8px;
+        padding: 1.5rem;
       }
-
-      .form-header,
-      .student-form {
-        padding: 1rem;
+      .form-header h1 {
+        font-size: 1.5rem;
       }
-
-      .form-title {
-        font-size: 1.25rem;
-      }
-
-      .form-actions {
-        flex-direction: column;
-      }
-    }
-
-    .form-input:invalid:not(:placeholder-shown) {
-      border-color: var(--danger);
-    }
-
-    .form-input:valid:not(:placeholder-shown) {
-      border-color: var(--success);
     }
   </style>
   <!-- ===== Internal CSS ends here ===== -->
 </head>
 
 <body>
-  <!-- Your original HTML + PHP form content goes here -->
-   <h1>Create Student</h1>
-<form method="post" action="/users/create">
-  <label>First Name:</label><input type="text" name="first_name"><br>
-  <label>Last Name:</label><input type="text" name="last_name"><br>
-  <label>Email:</label><input type="email" name="email"><br>
-  <button type="submit">Save</button>
-</form>
-<a href="/users">⬅ Back</a>
+  <div class="form-card">
+    <div class="form-header">
+      <h1>Create Student</h1>
+      <p>Fill out the form to add a new student</p>
+    </div>
+
+    <form method="post" action="/users/create">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" name="first_name" placeholder="Enter first name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" name="last_name" placeholder="Enter last name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter email address" required>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit">💾 Save</button>
+        <a href="/users" class="back-link">⬅ Back</a>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
