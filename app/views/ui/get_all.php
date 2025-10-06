@@ -244,11 +244,14 @@
 <body>
   <h2><?= $show_deleted ? 'Deleted Students' : 'Active Students' ?></h2>
 
-  <div>
+  <!-- Action Buttons -->
+  <div style="margin-bottom: 1rem;">
+    <a href="/users/create" class="btn" id="btn-add-user">➕ Create New Student</a>
     <a href="/users/get-all" class="btn">Show Active</a>
     <a href="/users/get-all?show=deleted" class="btn">Show Deleted</a>
   </div>
 
+  <!-- Search Form -->
   <form method="get" action="/users/get-all" style="margin-top: 1rem;">
     <?php if ($show_deleted): ?>
       <input type="hidden" name="show" value="deleted">
@@ -257,6 +260,7 @@
     <button type="submit">Search</button>
   </form>
 
+  <!-- Data Table -->
   <table class="data-table">
     <thead>
       <tr>
@@ -283,8 +287,10 @@
     </tbody>
   </table>
 
+  <!-- Pagination -->
   <div class="pagination-nav">
     <?= $pagination_links ?>
   </div>
 </body>
+
 </html>
