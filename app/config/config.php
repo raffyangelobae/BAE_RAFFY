@@ -79,7 +79,7 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] 				= 'https://bae-raffy.onrender.com/';
+$config['base_url'] 				= 'https://bae-raffy-1.onrender.com';
 
 /*
 |--------------------------------------------------------------------------
