@@ -4,344 +4,287 @@
   <meta charset="UTF-8">
   <title>Students List</title>
   <style>
-    /* Table Styles */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
+    /* =======================================
+       GLOBAL THEME VARIABLES
+    ======================================= */
+    :root {
+      --bg-tertiary: #f9fafb;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted: #9ca3af;
+      --border-primary: #d1d5db;
+      --border-secondary: #9ca3af;
+      --accent-one: #3b82f6;
+      --accent-two: #2563eb;
+      --danger: #dc2626;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-2xl: 3rem;
+      --radius-lg: 8px;
+      font-family: Arial, sans-serif;
+    }
 
-.data-table thead {
-  background: var(--bg-tertiary);
-  border-bottom: 2px solid var(--border-secondary);
-}
+    body {
+      margin: 2rem;
+      background-color: #ffffff;
+      color: var(--text-primary);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-#btn-add-user {
-  margin-left: auto;
-  margin-right: var(--space-md);
-}
+    h2 {
+      color: var(--text-primary);
+    }
 
-.data-table th {
-  padding: var(--space-lg);
-  text-align: left;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border-primary);
-}
+    a.btn, button {
+      background-color: var(--accent-one);
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      margin-right: 6px;
+      font-size: 14px;
+    }
 
-.data-table tbody tr {
-  border-bottom: 1px solid var(--border-primary);
-  transition: all 0.2s ease;
-}
+    a.btn:hover, button:hover {
+      background-color: var(--accent-two);
+    }
 
-.data-table tbody tr:hover {
-  background: var(--bg-tertiary);
-}
+    input[type="text"] {
+      padding: 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border-secondary);
+      margin-right: 6px;
+    }
 
-.data-table tbody tr:last-child {
-  border-bottom: none;
-}
+    /* =======================================
+       TABLE STYLES
+    ======================================= */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 14px;
+    }
 
-.data-table td {
-  padding: var(--space-lg);
-  color: var(--text-secondary);
-  vertical-align: middle;
-}
+    .data-table thead {
+      background: var(--bg-tertiary);
+      border-bottom: 2px solid var(--border-secondary);
+    }
 
-.data-table td:first-child {
-  color: var(--text-muted);
-  font-weight: 500;
-  font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
-}
+    .data-table th {
+      padding: var(--space-sm);
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border-primary);
+    }
 
-/* Table Actions */
-.table-actions {
-  display: flex;
-  gap: var(--space-sm);
-  align-items: center;
-}
+    .data-table tbody tr {
+      border-bottom: 1px solid var(--border-primary);
+      transition: background 0.2s ease;
+    }
 
-/* Student Row Specific Styling */
-[id^="student-row-"] td:nth-child(2),
-[id^="student-row-"] td:nth-child(3) {
-  font-weight: 500;
-  color: var(--text-primary);
-}
+    .data-table tbody tr:hover {
+      background: var(--bg-tertiary);
+    }
 
-[id^="student-row-"] td:nth-child(4) {
-  color: var(--accent-two);
-  font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
-  font-size: 13px;
-}
+    .data-table td {
+      padding: var(--space-sm);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
 
-/* Enhanced Button Styles for Table */
-.table-actions .btn-secondary {
-  background: transparent;
-  border: 1px solid var(--border-secondary);
-  color: var(--text-secondary);
-  font-size: 11px;
-  padding: 6px 12px;
-}
+    /* =======================================
+       TABLE ACTION BUTTONS
+    ======================================= */
+    .table-actions a {
+      background: transparent;
+      border: 1px solid var(--border-secondary);
+      color: var(--text-secondary);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s ease-in-out;
+    }
 
-.table-actions .btn-secondary:hover {
-  background: var(--accent-one);
-  border-color: var(--accent-one);
-  color: white;
-  transform: none;
-}
+    .table-actions a:hover {
+      background: var(--accent-one);
+      color: white;
+      border-color: var(--accent-one);
+    }
 
-.table-actions .btn-danger {
-  background: var(--danger);
-  color: white;
-  border: 1px solid var(--danger);
-  font-size: 11px;
-  padding: 8px 12px;
+    .table-actions .danger {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
 
-  /* 
-  background: transparent;
-  border: 1px solid var(--danger);
-  color: var(--danger);
-  font-size: 11px;
-  padding: 6px 12px;
-  */
-}
+    .table-actions .danger:hover {
+      background: var(--danger);
+      color: white;
+    }
 
-.table-actions .btn-danger:hover {
-  background: transparent;
-  color: var(--danger);
-  transform: none;
-  /*
-  background: var(--danger);
-  color: white;
-  transform: none; */
-}
+    /* =======================================
+       PAGINATION STYLES
+    ======================================= */
+    .pagination-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
 
-/* Loading States */
-.data-table tbody tr.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
+    .pagination-list {
+      display: inline-flex;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: var(--space-2xl);
-  color: var(--text-muted);
-}
+    .pagination-item {
+      margin: 0;
+    }
 
-.empty-state h3 {
-  color: var(--text-secondary);
-  margin-bottom: var(--space-sm);
-}
+    .pagination-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 2.5rem;
+      height: 2.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280;
+      background-color: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      transition: 0.2s ease-in-out;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
 
-/* Responsive Table */
-@media (max-width: 768px) {
-  .data-table {
-    font-size: 12px;
-  }
+    .pagination-link:hover {
+      background-color: #f9fafb;
+      color: #374151;
+      border-color: #9ca3af;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-  .data-table th,
-  .data-table td {
-    padding: var(--space-sm);
-  }
+    .pagination-item.active .pagination-link {
+      background-color: #3b82f6;
+      color: #fff;
+      border-color: #3b82f6;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+    }
 
-  #btn-add-user {
-    margin-left: none;
-  }
+    .pagination-item.disabled .pagination-link {
+      background-color: #f8fafc;
+      border-color: #e2e8f0;
+      color: #cbd5e1;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
-  .table-actions {
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
+    /* =======================================
+       RESPONSIVE
+    ======================================= */
+    @media (max-width: 640px) {
+      .data-table,
+      .data-table thead,
+      .data-table tbody,
+      .data-table th,
+      .data-table td,
+      .data-table tr {
+        display: block;
+      }
 
-  .table-actions .btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
+      .data-table tr {
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-md);
+        padding: var(--space-md);
+        border: 1px solid var(--border-primary);
+      }
 
-@media (max-width: 640px) {
+      .data-table td {
+        border: none;
+        position: relative;
+        padding: var(--space-sm) 0;
+        padding-left: 40%;
+      }
 
-  /* Stack table on mobile */
-  .data-table,
-  .data-table thead,
-  .data-table tbody,
-  .data-table th,
-  .data-table td,
-  .data-table tr {
-    display: block;
-  }
+      .data-table td:before {
+        content: attr(data-label) ": ";
+        position: absolute;
+        left: 0;
+        width: 35%;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 11px;
+        text-transform: uppercase;
+      }
 
-  #btn-add-user {
-    margin-left: none;
-  }
-
-  .data-table thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  .data-table tr {
-    background: var(--bg-tertiary);
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-md);
-    padding: var(--space-md);
-    border: 1px solid var(--border-primary);
-  }
-
-  .data-table td {
-    border: none;
-    position: relative;
-    padding: var(--space-sm) 0;
-    padding-left: 40%;
-  }
-
-  .data-table td:before {
-    content: attr(data-label) ": ";
-    position: absolute;
-    left: 0;
-    width: 35%;
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .table-actions {
-    padding-left: 0 !important;
-    flex-direction: row;
-    gap: var(--space-sm);
-    margin-top: var(--space-sm);
-  }
-}
-
-/*pagination classes*/
-  .pagination-nav {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .pagination-list {
-    display: inline-flex;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .pagination-item {
-    margin: 0;
-  }
-
-  .pagination-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #6b7280;
-    background-color: #fff;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-    text-decoration: none;
-    transition: 0.2s ease-in-out;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  .pagination-link:hover {
-    background-color: #f9fafb;
-    color: #374151;
-    border-color: #9ca3af;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .pagination-item.active .pagination-link {
-    background-color: #3b82f6;
-    color: #fff;
-    border-color: #3b82f6;
-    font-weight: 600;
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
-  }
-
-  .pagination-item.active .pagination-link:hover {
-    background-color: #2563eb;
-    border-color: #2563eb;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.4);
-  }
-
-  .pagination-item:first-child .pagination-link,
-  .pagination-item:last-child .pagination-link {
-    background-color: #f8fafc;
-    border-color: #e2e8f0;
-    color: #64748b;
-    font-weight: 500;
-  }
-
-  .pagination-item.disabled .pagination-link {
-    background-color: #f8fafc;
-    border-color: #e2e8f0;
-    color: #cbd5e1;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
+      .table-actions {
+        flex-direction: row;
+        gap: var(--space-sm);
+        margin-top: var(--space-sm);
+      }
+    }
   </style>
 </head>
 
 <body>
-<h2><?= $show_deleted ? 'Deleted Students' : 'Active Students' ?></h2>
+  <h2><?= $show_deleted ? 'Deleted Students' : 'Active Students' ?></h2>
 
-<a href="/users/get-all" class="btn">Show Active</a>
-<a href="/users/get-all?show=deleted" class="btn">Show Deleted</a>
+  <div>
+    <a href="/users/get-all" class="btn">Show Active</a>
+    <a href="/users/get-all?show=deleted" class="btn">Show Deleted</a>
+  </div>
 
-<form method="get" action="/users/get-all">
+  <form method="get" action="/users/get-all" style="margin-top: 1rem;">
     <?php if ($show_deleted): ?>
-        <input type="hidden" name="show" value="deleted">
+      <input type="hidden" name="show" value="deleted">
     <?php endif; ?>
     <input type="text" name="search" value="<?= $search ?? '' ?>" placeholder="Search...">
     <button type="submit">Search</button>
-</form>
+  </form>
 
-<table border="1" cellpadding="5">
+  <table class="data-table">
     <thead>
-        <tr>
-            <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
-        </tr>
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-        <?php foreach ($records as $r): ?>
+      <?php foreach ($records as $r): ?>
         <tr>
-            <td><?= $r['id'] ?></td>
-            <td><?= $r['first_name'] . ' ' . $r['last_name'] ?></td>
-            <td><?= $r['email'] ?></td>
-            <td>
-                <?php if ($show_deleted): ?>
-                    <a href="/users/restore/<?= $r['id'] ?>">Restore</a> | 
-                    <a href="/users/hard_delete/<?= $r['id'] ?>" onclick="return confirm('Hard delete permanently?')">Hard Delete</a>
-                <?php else: ?>
-                    <a href="/users/update/<?= $r['id'] ?>">Edit</a> | 
-                    <a href="/users/delete/<?= $r['id'] ?>" onclick="return confirm('Soft delete this student?')">Delete</a>
-                <?php endif; ?>
-            </td>
+          <td data-label="ID"><?= $r['id'] ?></td>
+          <td data-label="Name"><?= $r['first_name'] . ' ' . $r['last_name'] ?></td>
+          <td data-label="Email"><?= $r['email'] ?></td>
+          <td data-label="Actions" class="table-actions">
+            <?php if ($show_deleted): ?>
+              <a href="/users/restore/<?= $r['id'] ?>">Restore</a>
+              <a href="/users/hard_delete/<?= $r['id'] ?>" class="danger" onclick="return confirm('Hard delete permanently?')">Hard Delete</a>
+            <?php else: ?>
+              <a href="/users/update/<?= $r['id'] ?>">Edit</a>
+              <a href="/users/delete/<?= $r['id'] ?>" class="danger" onclick="return confirm('Soft delete this student?')">Delete</a>
+            <?php endif; ?>
+          </td>
         </tr>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
     </tbody>
-</table>
+  </table>
 
-<div>
+  <div class="pagination-nav">
     <?= $pagination_links ?>
-</div>
-
+  </div>
 </body>
 </html>
-                    
